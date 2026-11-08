@@ -19,7 +19,7 @@ AI agents look for correctness bugs in open-source research software. A separate
 | [feedzai/deccaf](https://github.com/feedzai/deccaf) ([report](feedzai-deccaf/README.md)) | Python | `b910b48d7e146d53b5f145224b819bdb0962d40a` | 3 | 2 | reported to the authors, Nov 2026 |
 | [weissmanlab/magic](https://github.com/weissmanlab/magic) ([report](weissmanlab-magic/README.md)) | Python | `87fd0923480d28399c5078ff4efd60c3205c22a0` | 4 | 0 | reported to the authors, Nov 2026 |
 | [GO::TermFinder](https://metacpan.org/release/SHERLOCK/GO-TermFinder-0.86) ([report](cpan-GO-TermFinder/README.md)) | Perl | `0.86` | 6 | 2 | reported to the authors, Nov 2026 |
-| [glm-tools/pyglmnet](https://github.com/glm-tools/pyglmnet) ([report](glm-tools-pyglmnet/README.md)) | Python | `9339c5c71c908ec31cf4bebda5d9fe47dfed4f1c` | 3 | 0 | [#399](https://github.com/glm-tools/pyglmnet/pull/399), [#400](https://github.com/glm-tools/pyglmnet/pull/400), [#401](https://github.com/glm-tools/pyglmnet/pull/401) |
+| [glm-tools/pyglmnet](https://github.com/glm-tools/pyglmnet) ([report](glm-tools-pyglmnet/README.md)) | Python | `9339c5c71c908ec31cf4bebda5d9fe47dfed4f1c` | 3 | 0 | [#399](https://github.com/glm-tools/pyglmnet/pull/399) merged, [#400](https://github.com/glm-tools/pyglmnet/pull/400) open, [#401](https://github.com/glm-tools/pyglmnet/pull/401) merged |
 
 Minor defects are included in the confirmed counts. Reports preserve the limits of each finding; they do not establish changes to published scientific results.
 

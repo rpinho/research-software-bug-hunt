@@ -1,6 +1,6 @@
 # glm-tools/pyglmnet
 
-Three confirmed defects, reported through the open pull requests below in Nov 2026. Patches and tests live in the pull requests.
+Three confirmed defects, reported through the pull requests below in Nov 2026. #399 and #401 were merged on Nov 8; #400 is open. Patches and tests live in the pull requests.
 
 Upstream base commit: [`9339c5c71c908ec31cf4bebda5d9fe47dfed4f1c`](https://github.com/glm-tools/pyglmnet/tree/9339c5c71c908ec31cf4bebda5d9fe47dfed4f1c).
 
