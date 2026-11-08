@@ -25,6 +25,8 @@ Minor defects are included in the confirmed counts. Reports preserve the limits 
 
 ## How a bug gets in
 
+The full rules, and the numbers so far, are in [METHOD.md](METHOD.md).
+
 1. Hunt for a correctness bug in a pinned upstream version.
 2. An independent referee rebuilds the claim from scratch.
 3. Prepare a patch and a small before/after example.
