@@ -1,0 +1,13 @@
+--- a/lib/GO/TermFinder.pm
++++ b/lib/GO/TermFinder.pm
+@@ -1771,7 +1771,9 @@
+ 
+     if ($self->__isUsingPopulation){
+ 
+-	@names = @{$self->__population};
++	# Resolve aliases and duplicates exactly as for the background counts.
++	my ($ids) = $self->__determineDatabaseIdsFromGenes($self->__population);
++	@names = @{$ids};
+ 
+     }else{
+ 

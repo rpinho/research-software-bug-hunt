@@ -1,0 +1,13 @@
+diff --git a/magic.py b/magic.py
+index b6612b9..9f7cd94 100755
+--- a/magic.py
++++ b/magic.py
+@@ -424,7 +424,7 @@ def clean_parameters(ans, args):
+ 			# assumed mass at 0
+ 			wzero += params[-1]/norm
+ 		if wzero:
+-			niceparams += [wzero,]
++			niceparams += [[wzero],]
+ 	elif args.family == 'pieceexp':
+ 		niceparams = np.transpose(params)
+ 	return niceparams

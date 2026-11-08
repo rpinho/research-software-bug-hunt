@@ -1,0 +1,10 @@
+args <- commandArgs(TRUE)
+.libPaths(c(args[1], Sys.getenv('R_LIBS_USER'), .libPaths()))
+library(ksea)
+options(mc.cores=1)
+ranking <- LETTERS[1:6]
+edge <- ksea(ranking,6:1,c('A','D'),p=0,display=FALSE,returnRS=TRUE)
+normal <- ksea(ranking,6:1,c('A','D'),display=FALSE,returnRS=TRUE)
+values <- c(edge_ES=edge$ES,setNames(edge$RS,paste0('edge_RS_',1:6)),normal_ES=normal$ES,setNames(normal$RS,paste0('normal_RS_',1:6)))
+write.table(data.frame(metric=names(values),value=as.numeric(values)),args[2],sep='\t',quote=FALSE,row.names=FALSE)
+print(values)

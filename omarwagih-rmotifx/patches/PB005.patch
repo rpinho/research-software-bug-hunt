@@ -1,0 +1,17 @@
+diff --git a/R/motifx-functions.R b/R/motifx-functions.R
+index 72d6c22..9cedc73 100644
+--- a/R/motifx-functions.R
++++ b/R/motifx-functions.R
+@@ -93,7 +93,11 @@
+     npwm = .BuildPWM(bg.seqs)
+     
+     # Compute binomial matrix
+-    bin = 1 - pbinom(ppwm-1, length(fg.seqs), npwm, lower.tail=TRUE)
++    bin = if(perl.impl) {
++      1 - pbinom(ppwm-1, length(fg.seqs), npwm, lower.tail=TRUE)
++    } else {
++      pbinom(ppwm-1, length(fg.seqs), npwm, lower.tail=FALSE)
++    }
+     
+     rownames(bin) = rownames(ppwm)
+     colnames(bin) = colnames(ppwm)

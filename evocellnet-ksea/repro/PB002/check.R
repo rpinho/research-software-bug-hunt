@@ -1,0 +1,16 @@
+args <- commandArgs(TRUE)
+.libPaths(c(args[1], Sys.getenv('R_LIBS_USER'), .libPaths()))
+library(ksea)
+options(mc.cores=1)
+ranking <- LETTERS[1:6]
+set.seed(3)
+edge <- ksea(ranking,6:1,c('A','D'),p=2,display=FALSE,significance=TRUE,trial=1000)
+set.seed(3)
+normal <- ksea(ranking,6:1,c('A','D'),display=FALSE,significance=TRUE,trial=1000)
+values <- c(edge_ES=edge$ES,edge_p=edge$p.value,normal_ES=normal$ES,normal_p=normal$p.value)
+write.table(data.frame(metric=names(values),value=as.numeric(values)),args[2],sep='\t',quote=FALSE,row.names=FALSE)
+# Publish exactly the draws used above, allowing a second-language recomputation.
+set.seed(3)
+draws <- t(replicate(1000,sample(1:6,2)))
+write.table(draws,paste0(args[2],'.draws'),sep='\t',quote=FALSE,row.names=FALSE,col.names=FALSE)
+print(values)

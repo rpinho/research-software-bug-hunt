@@ -1,0 +1,52 @@
+diff --git a/src/intronIC/extraction/sequences.py b/src/intronIC/extraction/sequences.py
+index c5cd403..bf57a9b 100644
+--- a/src/intronIC/extraction/sequences.py
++++ b/src/intronIC/extraction/sequences.py
+@@ -365,41 +365,12 @@ class SequenceExtractor:
+         # Extract branch point region
+         # BP coords are relative to 3' splice site (acceptor)
+         # Adjust to be 0-based and relative to intron end
+-        bp_start_rel = bp_coords[0]  # Negative value (e.g., -55)
+-        bp_end_rel = bp_coords[1]  # Negative value (e.g., -5)
+-
+-        if coord.strand == "+":
+-            # For + strand: 3' splice site is at coord.stop
+-            # bp_start_rel is more negative (e.g., -55), so further upstream
+-            # bp_end_rel is less negative (e.g., -5), so closer to 3'ss
+-            bp_start_abs = coord.stop + bp_start_rel - 1  # -1 for 0-based
+-            bp_end_abs = coord.stop + bp_end_rel - 1
+-        else:
+-            # For - strand: 3' splice site is at coord.start
+-            # On - strand, the coordinates are reversed: more negative means further
+-            # in genomic coords (higher position), so we swap start/end
+-            # This matches v1.5.1: bpc = (bp_stop, bp_start) for reverse strand
+-            bp_end_abs = coord.start - bp_start_rel - 1  # Note: assigned to end
+-            bp_start_abs = coord.start - bp_end_rel - 1  # Note: assigned to start
+-
+-        # Extract BP region (different handling for cached vs indexed mode)
+-        if region_seq is not None:
+-            # Cached mode: slice from region_seq
+-            bp_start_abs = max(0, bp_start_abs)
+-            bp_end_abs = min(len(region_seq), bp_end_abs)
+-            bp_region_seq = region_seq[bp_start_abs:bp_end_abs]
+-        else:
+-            # Indexed mode: fetch from genome
+-            # Convert back to 1-based for fetch
+-            bp_fetch_start = max(1, bp_start_abs + 1)
+-            bp_fetch_stop = bp_end_abs + 1
+-
+-            bp_region_seq = self.genome_reader.fetch(
+-                coord.chromosome, bp_fetch_start, bp_fetch_stop
+-            ).upper()
+-
+-        if coord.strand == "-":
+-            bp_region_seq = reverse_complement(bp_region_seq)
++        # intron_seq is already in transcript orientation on both strands.
++        # Use half-open offsets from its end, without a second coordinate
++        # conversion or an inclusive indexed fetch.
++        bp_start = max(0, len(intron_seq) + bp_coords[0])
++        bp_stop = max(0, min(len(intron_seq), len(intron_seq) + bp_coords[1]))
++        bp_region_seq = intron_seq[bp_start:bp_stop]
+ 
+         # Identify terminal dinucleotides
+         five_prime_dnt = intron_seq[:2] if len(intron_seq) >= 2 else intron_seq

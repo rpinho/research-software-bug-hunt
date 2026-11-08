@@ -1,0 +1,37 @@
+diff --git a/pyfdd/core/fit.py b/pyfdd/core/fit.py
+index f8c4fc1..0bca1c2 100755
+--- a/pyfdd/core/fit.py
++++ b/pyfdd/core/fit.py
+@@ -12,6 +12,7 @@ import warnings
+ import numpy as np
+ import scipy.optimize as op
+ import numdifftools as nd
++from scipy.special import xlogy
+ import matplotlib.pyplot as plt
+ 
+ # Imports from project
+@@ -313,7 +314,14 @@ class Fit:
+         sim_pattern = gen.make_pattern(dx, dy, phi, fractions_sims, total_events, sigma=sigma, pattern_type='ideal')
+         self.sim_pattern = sim_pattern.copy()
+         #chi2 = np.sum((data_pattern - sim_pattern) ** 2 / np.abs(sim_pattern))
+-        chi2 = np.sum((data_pattern - sim_pattern)**2 / sim_pattern)
++        # Preserve data masks, but never mask an invalid model's arithmetic.
++        residual = np.ma.getdata(data_pattern - sim_pattern)
++        expected = np.ma.getdata(sim_pattern)
++        with np.errstate(divide='ignore', invalid='ignore'):
++            terms = residual**2 / expected
++        terms[(expected == 0) & (residual == 0)] = 0
++        mask = np.ma.getmaskarray(data_pattern) | np.ma.getmaskarray(sim_pattern)
++        chi2 = np.ma.array(terms, mask=mask).sum()
+         #print('chi2 - {:0.12f}'.format(chi2))
+         # print('p-value - ',pval)
+         # =====
+@@ -401,7 +409,7 @@ class Fit:
+         sim_pattern = gen.make_pattern(dx, dy, phi, fractions_sims, total_events, sigma=sigma, pattern_type='ideal')
+         self.sim_pattern = sim_pattern.copy()
+         # negative log likelihood
+-        nll = -np.sum(data_pattern * np.log(sim_pattern))        # extended log likelihood - no need to fit events
++        nll = -np.sum(xlogy(data_pattern, sim_pattern))  # xlogy(0, 0)=0; xlogy(n>0, 0)=-inf
+         #ll = -np.sum(events_per_sim) + np.sum(data_pattern * np.log(sim_pattern))
+         #print('likelihood - ', nll)
+         # =====

@@ -1,0 +1,13 @@
+diff --git a/pyfdd/core/fit.py b/pyfdd/core/fit.py
+index f8c4fc1..382ea7e 100755
+--- a/pyfdd/core/fit.py
++++ b/pyfdd/core/fit.py
+@@ -366,7 +366,7 @@ class Fit:
+         # experimental vs theoretical range.
+         if self.previous_cost_value is None:
+             self.previous_cost_value = chi2
+-        elif chi2 > self.previous_cost_value * 1e12:
++        elif self.previous_cost_value > 0 and chi2 > self.previous_cost_value * 1e12:
+             # limit the increase to 12 orders of mag
+             chi2 = chi2 * 10 ** (np.round(12 - np.log10(chi2)))
+         else:

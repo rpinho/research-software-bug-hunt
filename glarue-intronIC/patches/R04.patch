@@ -1,0 +1,32 @@
+diff --git a/src/intronIC/cli/main.py b/src/intronIC/cli/main.py
+index b005fda..31f3985 100644
+--- a/src/intronIC/cli/main.py
++++ b/src/intronIC/cli/main.py
+@@ -5062,6 +5062,27 @@ def main_extract(config: IntronICConfig):
+ 
+ 
+ def main_classify(config: IntronICConfig):
++    # Post-processing, metadata synchronization, and plots address columns by
++    # name. Keep internal headers until all of those consumers have finished.
++    no_headers = config.output.no_headers
++    if no_headers:
++        config = replace(config, output=replace(config.output, no_headers=False))
++    _main_classify_with_headers(config)
++    if no_headers:
++        for suffix in (".meta.iic", ".score_info.iic"):
++            path = config.output.get_output_path(suffix)
++            if not path.exists():
++                continue
++            with open(path) as source, tempfile.NamedTemporaryFile(
++                mode="w", dir=path.parent, delete=False
++            ) as target:
++                next(source, None)
++                shutil.copyfileobj(source, target)
++            Path(target.name).chmod(path.stat().st_mode & 0o777)
++            Path(target.name).replace(path)
++
++
++def _main_classify_with_headers(config: IntronICConfig):
+     """Run the complete intronIC classification pipeline.
+ 
+     This is the standard workflow:

@@ -1,0 +1,56 @@
+diff --git a/Code/deferral/run_alert.py b/Code/deferral/run_alert.py
+index ae608b6..2318796 100644
+--- a/Code/deferral/run_alert.py
++++ b/Code/deferral/run_alert.py
+@@ -24,7 +24,7 @@ def full_auto_func(capacities, batches, testset, env, model, scen, l):
+ 
+     assignments = pd.DataFrame(columns = ['assignment'])
+     results = pd.DataFrame(columns = ['prediction'])
+-    for i in np.arange(1,batches['batch'].max()+1):
++    for i in pd.unique(batches['batch']):
+         cases = testset.loc[batches.loc[batches['batch'] == i]['case_id'],:]
+         for ix in cases.index:
+             assignments.loc[ix] = 'auto-reject'
+@@ -47,7 +47,7 @@ def full_model_func(capacities, batches, testset, expert_preds, env, model, scen
+ 
+     assignments = pd.DataFrame(columns = ['assignment'])
+     results = pd.DataFrame(columns = ['prediction'])
+-    for i in np.arange(1,batches['batch'].max()+1):
++    for i in pd.unique(batches['batch']):
+         cases = testset.loc[batches.loc[batches['batch'] == i]['case_id'],:]
+         for ix in cases.index:
+             assignments.loc[ix] = 'model#0'
+@@ -70,7 +70,7 @@ def rand_deferral_func(capacities, batches, testset, expert_preds, env, model, s
+ 
+     assignments = pd.DataFrame(columns = ['assignment'])
+     results = pd.DataFrame(columns = ['prediction'])
+-    for i in np.arange(1,batches['batch'].max()+1):
++    for i in pd.unique(batches['batch']):
+         c = capacities.loc[capacities['batch_id'] == i,:].iloc[0]
+         c.loc['model#0'] = c['batch_size'] - c[2:].sum()
+         cases = testset.loc[batches.loc[batches['batch'] == i]['case_id'],:]
+@@ -105,7 +105,7 @@ def ova_deferral_func(capacities, batches, testset, expert_preds, model_preds, e
+ 
+     assignments = pd.DataFrame(columns = ['assignment'])
+     results = pd.DataFrame(columns = ['prediction'])
+-    for i in np.arange(1,batches['batch'].max()+1):
++    for i in pd.unique(batches['batch']):
+         c = capacities.loc[capacities['batch_id'] == i,:].iloc[0]
+         c.loc['model#0'] = c['batch_size'] - c[2:].sum()
+         cases = testset.loc[batches.loc[batches['batch'] == i]['case_id'],:]
+@@ -137,13 +137,13 @@ def deccaf_cp_deferral_func(capacities, batches, testset, expert_preds, model_pr
+     model_name = model
+     assignments = pd.DataFrame(columns = ['assignment'])
+     results = pd.DataFrame(columns = ['prediction'])
+-    for b in np.arange(1,batches['batch'].max()+1):
++    for b in pd.unique(batches['batch']):
+         c = capacities.loc[capacities['batch_id'] == b,:].iloc[0]
+         c.loc['model#0'] = c['batch_size'] - c[2:].sum()
+         cases = testset.loc[batches.loc[batches['batch'] == b]['case_id'],:] 
+         preds = model_preds.loc[cases.index]
+         cost_matrix_df = preds.T
+-        for d in c.index:
++        for d in cost_matrix_df.index:
+             if c.loc[d] == 0:
+                 cost_matrix_df = cost_matrix_df.drop(index=d)
+                 

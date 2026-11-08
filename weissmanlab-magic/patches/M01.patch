@@ -1,0 +1,13 @@
+diff --git a/magic.py b/magic.py
+index b6612b9..8a0c0bb 100755
+--- a/magic.py
++++ b/magic.py
+@@ -501,7 +501,7 @@ class PiecewiseExponential(scipy.stats.rv_continuous):
+ 	def _cdf(self, t):
+ 		return 1 - self._sf(t)
+ 	def mean(self):
+-		return -np.concatenate((np.diff(self.breakPs), [0])) @ (1/self.rates)
++		return -np.diff(np.concatenate((self.breakPs, [0]))) @ (1/self.rates)
+ 	def lt(self, s):
+ 		'''Laplace transform evaluated at s.'''
+ 		return self.breakPs[-1] * np.exp(-s * self.breaks[-1]) / (1 + s / self.rates[-1]) - (

@@ -1,0 +1,3 @@
+Documented contract: supplied parameters determine the fit; custom run must not look up an undefined variable.
+Before: object param not found. After: requested 1 repetition, 3 folds, 2 trees each.
+Default normal fit: all 15 fitted ensembles and folds byte-identical, excluding runtime metadata.

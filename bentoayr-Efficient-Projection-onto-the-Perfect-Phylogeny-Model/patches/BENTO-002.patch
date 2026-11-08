@@ -1,0 +1,13 @@
+diff --git a/project_onto_PPM.c b/project_onto_PPM.c
+index 6524535..3984864 100644
+--- a/project_onto_PPM.c
++++ b/project_onto_PPM.c
+@@ -916,7 +916,7 @@ realnumber tree_cost_projection(shortint inner_flag, shortint compute_M_flag, re
+ 
+     for (int i = 0; i < num_nodes*T - 1; i++){
+         realnumber x = ((realnumber)rand() / (realnumber)(RAND_MAX)) * 2e-6 - 1e-6;
+-        data[i] += x;
++        data[i] += x / gamma_init[i / T];
+     }
+     
+     realnumber error_tree_model = 0.0;

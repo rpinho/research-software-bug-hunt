@@ -1,0 +1,3 @@
+before: exit 1
+after: exit 0
+header-free score rows: 2

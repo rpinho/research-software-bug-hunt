@@ -1,0 +1,11 @@
+--- a/lib/GO/AnnotationProvider/AnnotationParser.pm
++++ b/lib/GO/AnnotationProvider/AnnotationParser.pm
+@@ -580,7 +580,7 @@
+ 
+ 	@line = split("\t", $_, -1);
+ 
+-	next if $line[$kNotColumn] eq 'NOT'; # skip annotations NOT to a GOID
++	next if $line[$kNotColumn] =~ /(?:^|\|)NOT(?:\||$)/; # skip annotations NOT to a GOID
+ 
+ 	($databaseId, $goid, $aspect) = @line[$kDatabaseIdColumn, $kGoidColumn, $kAspectColumn];
+ 	($standardName, $aliases)     = @line[$kStandardNameColumn, $kAliasesColumn];

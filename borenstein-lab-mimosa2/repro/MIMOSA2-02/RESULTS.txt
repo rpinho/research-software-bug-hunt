@@ -1,0 +1,8 @@
+before:
+model_cov=FALSE: A=0, B=1, Residual=0
+model_cov=TRUE: A=0, B=0, Residual=0
+after:
+model_cov=FALSE: A=0, B=1, Residual=0
+model_cov=TRUE: A=0, B=1, Residual=0
+Dense normal input: exactly unchanged.
+Independent exact-rational check: A=0, B=1, Residual=0; shares sum to 1.

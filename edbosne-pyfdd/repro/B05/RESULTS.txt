@@ -1,0 +1,19 @@
+before:
+{
+  "scalar_nomask_dof": -5,
+  "ndarray_dof": {
+    "error": "AttributeError",
+    "message": "module 'numpy' has no attribute 'Array'"
+  },
+  "normal": {
+    "explicit_mask_dof": 2
+  }
+}
+after:
+{
+  "scalar_nomask_dof": 3,
+  "ndarray_dof": 3,
+  "normal": {
+    "explicit_mask_dof": 2
+  }
+}

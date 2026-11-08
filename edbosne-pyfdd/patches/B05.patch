@@ -1,0 +1,15 @@
+diff --git a/pyfdd/core/fit.py b/pyfdd/core/fit.py
+index f8c4fc1..ee47fe7 100755
+--- a/pyfdd/core/fit.py
++++ b/pyfdd/core/fit.py
+@@ -271,8 +271,8 @@ class Fit:
+ 
+         # getting the number of data points
+         if isinstance(self.data_pattern, np.ma.MaskedArray):
+-            n_pixels = (~self.data_pattern.mask).sum()
+-        elif isinstance(self.data_pattern, np.Array):
++            n_pixels = self.data_pattern.count()
++        elif isinstance(self.data_pattern, np.ndarray):
+             n_pixels = self.data_pattern.size
+         else:
+             raise ValueError('The data pattern is not correctly set')

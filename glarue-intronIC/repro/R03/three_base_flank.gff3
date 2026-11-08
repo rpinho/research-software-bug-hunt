@@ -1,0 +1,9 @@
+##gff-version 3
+forward	hand	gene	1	153	.	+	.	ID=forward_g
+forward	hand	mRNA	1	153	.	+	.	ID=forward_t;Parent=forward_g
+forward	hand	exon	1	50	.	+	.	Parent=forward_t
+forward	hand	exon	151	153	.	+	.	Parent=forward_t
+reverse	hand	gene	1	153	.	-	.	ID=reverse_g
+reverse	hand	mRNA	1	153	.	-	.	ID=reverse_t;Parent=reverse_g
+reverse	hand	exon	1	3	.	-	.	Parent=reverse_t
+reverse	hand	exon	104	153	.	-	.	Parent=reverse_t

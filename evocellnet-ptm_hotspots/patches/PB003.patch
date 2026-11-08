@@ -1,0 +1,17 @@
+diff --git a/ptm_hotspots.py b/ptm_hotspots.py
+index 58299bd..d873850 100644
+--- a/ptm_hotspots.py
++++ b/ptm_hotspots.py
+@@ -200,9 +200,9 @@ def getHotspotSitesInFile(alignment_path, ptms, repeat):
+                                         column_names, indexes)
+     bg_df['domain'] = os.path.splitext(os.path.basename(alignment_path))[0]
+     bg_df['position_aln'] = indexes[4:-2]
+-    bg_df['bg_medians'] = bg_df.iloc[:, 0:(repeat-1)].median(axis=1).tolist()
+-    bg_df['bg_stdev'] = bg_df.iloc[:, 0:(repeat-1)].std(axis=1).tolist()
+-    bg_df['bg_means'] = bg_df.iloc[:, 0:(repeat-1)].mean(axis=1).tolist()
++    bg_df['bg_medians'] = bg_df.iloc[:, 0:repeat].median(axis=1).tolist()
++    bg_df['bg_stdev'] = bg_df.iloc[:, 0:repeat].std(axis=1).tolist()
++    bg_df['bg_means'] = bg_df.iloc[:, 0:repeat].mean(axis=1).tolist()
+     bg_df['foreground'] = foreground
+     # this is to count pvals and add them to the column in background_dataframe
+     all_pvals = []

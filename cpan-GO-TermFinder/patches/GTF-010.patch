@@ -1,0 +1,13 @@
+--- a/lib/GO/OntologyProvider/OboParser.pm
++++ b/lib/GO/OntologyProvider/OboParser.pm
+@@ -615,6 +615,10 @@
+ 
+     foreach my $ancestorGoid (@{$self->{$kParent}{$parentGoid}}) {
+ 
++        die "Cycle in ontology involving $ancestorGoid\n"
++            if $ancestorGoid eq $childNode->goid ||
++               grep { defined($_) && $_->goid eq $ancestorGoid } @{$pathArrayRef};
++
+ 	# add the ancestor node to our path to the root which is being
+ 	# built
+ 

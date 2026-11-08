@@ -1,0 +1,32 @@
+before:
+{
+  "parameter_scales": {
+    "1": {
+      "fitted_total": 90.0,
+      "std": 3e-10
+    },
+    "10": {
+      "fitted_total": 90.0,
+      "std": 3e-09
+    }
+  },
+  "normal": {
+    "chi2_at_80_counts": 1.2499999999999991
+  }
+}
+after:
+{
+  "parameter_scales": {
+    "1": {
+      "fitted_total": 90.0,
+      "std": 9.486833
+    },
+    "10": {
+      "fitted_total": 90.0,
+      "std": 9.486833
+    }
+  },
+  "normal": {
+    "chi2_at_80_counts": 1.2499999999999991
+  }
+}

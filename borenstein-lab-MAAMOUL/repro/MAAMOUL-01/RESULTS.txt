@@ -1,0 +1,12 @@
+before:
+partial: 4 vertices, 2 edges, 2 imputed nodes
+metabolites_complete: ERROR: arguments imply differing number of rows: 0, 1
+ECs_complete: ERROR: arguments imply differing number of rows: 0, 1
+both_complete: ERROR: arguments imply differing number of rows: 0, 1
+after:
+partial: 4 vertices, 2 edges, 2 imputed nodes
+metabolites_complete: 4 vertices, 2 edges, 1 imputed nodes
+ECs_complete: 4 vertices, 2 edges, 1 imputed nodes
+both_complete: 4 vertices, 2 edges, 0 imputed nodes
+Normal partial-coverage graph and all attributes: unchanged.
+Independent set-based check: all four coverage cases agree; 4 vertices, 2 input edges.

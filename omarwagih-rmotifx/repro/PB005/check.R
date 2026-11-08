@@ -1,0 +1,12 @@
+args <- commandArgs(TRUE)
+.libPaths(c(args[1],Sys.getenv('R_LIBS_USER'),.libPaths()))
+library(rmotifx)
+alphabet <- c('A','R','N','D','C','Q','E','G','H','I','L','K','M','F','P','S','T','W','Y','V')
+# Cartesian products of arbitrary letters, not observed biological sequences.
+background <- as.vector(outer(alphabet,alphabet,function(a,b)paste0(a,'S',b)))
+foreground <- rep('ASA',20)
+edge <- motifx(foreground,background,central.res='S')
+legacy <- motifx(foreground,background,central.res='S',perl.impl=TRUE)
+normal <- motifx(foreground,c('ASA','ASG','GSA','GSG'),central.res='S')
+write.table(rbind(data.frame(case='edge',edge),data.frame(case='legacy',legacy),data.frame(case='normal',normal)),args[2],sep='\t',quote=FALSE,row.names=FALSE)
+print(edge); print(legacy);print(normal)

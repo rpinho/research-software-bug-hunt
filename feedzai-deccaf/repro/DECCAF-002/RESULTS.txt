@@ -1,0 +1,283 @@
+before:
+{
+  "normal/deccaf_cp_deferral_func": {
+    "assignments": {
+      "10": "human",
+      "20": "model#0"
+    },
+    "predictions": {
+      "10": 0,
+      "20": 0
+    },
+    "rows": 2
+  },
+  "normal/ova_deferral_func": {
+    "assignments": {
+      "10": "human",
+      "20": "model#0"
+    },
+    "predictions": {
+      "10": 0,
+      "20": 0
+    },
+    "rows": 2
+  },
+  "normal/rand_deferral_func": {
+    "assignments": {
+      "10": "model#0",
+      "20": "human"
+    },
+    "predictions": {
+      "10": 1,
+      "20": 1
+    },
+    "rows": 2
+  },
+  "normal/full_auto_func": {
+    "assignments": {
+      "10": "auto-reject",
+      "20": "auto-reject"
+    },
+    "predictions": {
+      "10": 1,
+      "20": 1
+    },
+    "rows": 2
+  },
+  "normal/full_model_func": {
+    "assignments": {
+      "10": "model#0",
+      "20": "model#0"
+    },
+    "predictions": {
+      "10": 1,
+      "20": 0
+    },
+    "rows": 2
+  },
+  "label_2/deccaf_cp_deferral_func": {
+    "error": "IndexError: single positional indexer is out-of-bounds"
+  },
+  "label_2/ova_deferral_func": {
+    "error": "IndexError: single positional indexer is out-of-bounds"
+  },
+  "label_2/rand_deferral_func": {
+    "error": "IndexError: single positional indexer is out-of-bounds"
+  },
+  "label_2/full_auto_func": {
+    "assignments": {
+      "10": "auto-reject",
+      "20": "auto-reject"
+    },
+    "predictions": {
+      "10": 1,
+      "20": 1
+    },
+    "rows": 2
+  },
+  "label_2/full_model_func": {
+    "assignments": {
+      "10": "model#0",
+      "20": "model#0"
+    },
+    "predictions": {
+      "10": 1,
+      "20": 0
+    },
+    "rows": 2
+  },
+  "label_0/deccaf_cp_deferral_func": {
+    "assignments": {},
+    "predictions": {},
+    "rows": 0
+  },
+  "label_0/ova_deferral_func": {
+    "assignments": {},
+    "predictions": {},
+    "rows": 0
+  },
+  "label_0/rand_deferral_func": {
+    "assignments": {},
+    "predictions": {},
+    "rows": 0
+  },
+  "label_0/full_auto_func": {
+    "assignments": {},
+    "predictions": {},
+    "rows": 0
+  },
+  "label_0/full_model_func": {
+    "assignments": {},
+    "predictions": {},
+    "rows": 0
+  }
+}
+after:
+Exact minimum assignment cost: 0.2
+{
+  "normal/deccaf_cp_deferral_func": {
+    "assignments": {
+      "10": "human",
+      "20": "model#0"
+    },
+    "predictions": {
+      "10": 0,
+      "20": 0
+    },
+    "rows": 2
+  },
+  "normal/ova_deferral_func": {
+    "assignments": {
+      "10": "human",
+      "20": "model#0"
+    },
+    "predictions": {
+      "10": 0,
+      "20": 0
+    },
+    "rows": 2
+  },
+  "normal/rand_deferral_func": {
+    "assignments": {
+      "10": "model#0",
+      "20": "human"
+    },
+    "predictions": {
+      "10": 1,
+      "20": 1
+    },
+    "rows": 2
+  },
+  "normal/full_auto_func": {
+    "assignments": {
+      "10": "auto-reject",
+      "20": "auto-reject"
+    },
+    "predictions": {
+      "10": 1,
+      "20": 1
+    },
+    "rows": 2
+  },
+  "normal/full_model_func": {
+    "assignments": {
+      "10": "model#0",
+      "20": "model#0"
+    },
+    "predictions": {
+      "10": 1,
+      "20": 0
+    },
+    "rows": 2
+  },
+  "label_2/deccaf_cp_deferral_func": {
+    "assignments": {
+      "10": "human",
+      "20": "model#0"
+    },
+    "predictions": {
+      "10": 0,
+      "20": 0
+    },
+    "rows": 2
+  },
+  "label_2/ova_deferral_func": {
+    "assignments": {
+      "10": "human",
+      "20": "model#0"
+    },
+    "predictions": {
+      "10": 0,
+      "20": 0
+    },
+    "rows": 2
+  },
+  "label_2/rand_deferral_func": {
+    "assignments": {
+      "10": "model#0",
+      "20": "human"
+    },
+    "predictions": {
+      "10": 1,
+      "20": 1
+    },
+    "rows": 2
+  },
+  "label_2/full_auto_func": {
+    "assignments": {
+      "10": "auto-reject",
+      "20": "auto-reject"
+    },
+    "predictions": {
+      "10": 1,
+      "20": 1
+    },
+    "rows": 2
+  },
+  "label_2/full_model_func": {
+    "assignments": {
+      "10": "model#0",
+      "20": "model#0"
+    },
+    "predictions": {
+      "10": 1,
+      "20": 0
+    },
+    "rows": 2
+  },
+  "label_0/deccaf_cp_deferral_func": {
+    "assignments": {
+      "10": "human",
+      "20": "model#0"
+    },
+    "predictions": {
+      "10": 0,
+      "20": 0
+    },
+    "rows": 2
+  },
+  "label_0/ova_deferral_func": {
+    "assignments": {
+      "10": "human",
+      "20": "model#0"
+    },
+    "predictions": {
+      "10": 0,
+      "20": 0
+    },
+    "rows": 2
+  },
+  "label_0/rand_deferral_func": {
+    "assignments": {
+      "10": "model#0",
+      "20": "human"
+    },
+    "predictions": {
+      "10": 1,
+      "20": 1
+    },
+    "rows": 2
+  },
+  "label_0/full_auto_func": {
+    "assignments": {
+      "10": "auto-reject",
+      "20": "auto-reject"
+    },
+    "predictions": {
+      "10": 1,
+      "20": 1
+    },
+    "rows": 2
+  },
+  "label_0/full_model_func": {
+    "assignments": {
+      "10": "model#0",
+      "20": "model#0"
+    },
+    "predictions": {
+      "10": 1,
+      "20": 0
+    },
+    "rows": 2
+  }
+}

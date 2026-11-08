@@ -1,0 +1,16 @@
+diff --git a/src/intronIC/file_io/genome.py b/src/intronIC/file_io/genome.py
+index 13fa4ab..bbc6c22 100644
+--- a/src/intronIC/file_io/genome.py
++++ b/src/intronIC/file_io/genome.py
+@@ -128,6 +128,11 @@ class GenomeReader:
+         if cached:
+             self._load_cache()
+ 
++    def close(self) -> None:
++        """Release cached sequences; FASTA streams already close after parsing."""
++        self.cache = None
++        self.is_cached = False
++
+     def _load_cache(self) -> None:
+         """Load all sequences into memory."""
+         self.cache = {}

@@ -1,0 +1,13 @@
+diff --git a/windower.py b/windower.py
+index 363dbc1..ee3a6eb 100755
+--- a/windower.py
++++ b/windower.py
+@@ -58,7 +58,7 @@ def snpdist(windows, L, args, rng=numpy.random):
+ def initwindows(SNPs, basecoverage, args):
+ 	L0 = args.baselength
+ 	#initialize windows
+-	windowcounts = numpy.histogram(SNPs, bins=list(range(1, len(basecoverage)*L0+1, L0)))[0]
++	windowcounts = numpy.histogram(SNPs, bins=list(range(1, (len(basecoverage)+1)*L0+1, L0)))[0]
+ 	return [numpy.array(x) for x in zip(windowcounts, basecoverage)]
+ 		
+ if __name__ == '__main__':	

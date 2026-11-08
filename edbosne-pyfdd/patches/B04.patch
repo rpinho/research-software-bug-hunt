@@ -1,0 +1,28 @@
+diff --git a/pyfdd/core/patterncreator.py b/pyfdd/core/patterncreator.py
+index f0bd4b6..5a34081 100755
+--- a/pyfdd/core/patterncreator.py
++++ b/pyfdd/core/patterncreator.py
+@@ -421,17 +421,18 @@ class PatternCreator:
+ 
+     def _add_background(self):
+ 
+-        # Ensure they have the same mask
+-        combined_mask = np.logical_or(self._pattern_current.mask, self._background_pattern.mask)
++        # Work on a copy: masks and normalization belong to this call only.
++        background_pattern = self._background_pattern.copy()
++        combined_mask = np.logical_or(self._pattern_current.mask, background_pattern.mask)
+         self._pattern_current.mask = combined_mask
+-        self._background_pattern.mask = combined_mask
++        background_pattern.mask = combined_mask
+ 
+         # Ensure the same normalization
+-        self._background_pattern *= self._pattern_current.sum() / self._background_pattern.sum()
++        background_pattern *= self._pattern_current.sum() / background_pattern.sum()
+ 
+         # add with respect to the correction factor
+         self._pattern_current = (1/self._background_factor) * self._pattern_current + \
+-                                (1 - 1/self._background_factor) * self._background_pattern
++                                (1 - 1/self._background_factor) * background_pattern
+ 
+ 
+     def _normalization(self, total_events=1):

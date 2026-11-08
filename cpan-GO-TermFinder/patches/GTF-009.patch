@@ -1,0 +1,39 @@
+--- a/lib/GO/OntologyProvider/OboParser.pm
++++ b/lib/GO/OntologyProvider/OboParser.pm
+@@ -275,16 +275,24 @@
+     my $isValidEntry = 0;
+ 
+     my $namespace;
++    my $skipStanza = 0;
+ 
+     while (<$ontologyFh>){
+ 
+ 	chomp;
+ 
+-	# finish parsing the obo file of we reach the typedef line.
+-
+-	last if (/^\[Typedef\]/);       
++	# Finish the previous term and skip non-term stanzas, wherever they occur.
++        if (/^\[(?!Term\])[^]]+\]$/){
++            $self->__processNode(\@entryLine) if $isValidEntry;
++            @entryLine = ();
++            $isValidEntry = 0;
++            $namespace = q{};
++            $skipStanza = 1;
++            next;
++        }       
+ 
+ 	if ($_ eq '[Term]') {
++            $skipStanza = 0;
+ 
+ 	    # we reached a new term - so process the previous entry
+ 
+@@ -301,6 +309,8 @@
+ 	    $isValidEntry = 0;
+ 	    $namespace    = '';
+ 
++	}elsif ($skipStanza){
++            next;
+ 	}elsif ($_ eq "namespace: $aspect"){
+ 
+ 	    # term is in the requested namespace

@@ -1,0 +1,16 @@
+diff --git a/R/core_mimosa2_funcs.R b/R/core_mimosa2_funcs.R
+index 351d90c..e61069d 100644
+--- a/R/core_mimosa2_funcs.R
++++ b/R/core_mimosa2_funcs.R
+@@ -482,6 +482,11 @@ calculate_var_shares_linear = function(species_contribution_table, valueVar = "n
+     }))
+     var_shares = var_shares[,sum(V1),by=list(compound, Species)]
+   } else {
++    species_contribution_table = melt(
++      dcast(species_contribution_table, Sample+compound~Species,
++            value.var = valueVar, fill = 0, fun.aggregate = sum),
++      id.vars = c("Sample", "compound"), variable.name = "Species",
++      value.name = valueVar, variable.factor = FALSE)
+     species_contribution_table[,totVar:=sum(get(valueVar)), by=list(compound, Sample)] #Total concentrations (must include residuals)
+     var_shares = species_contribution_table[,cov(get(valueVar), totVar), by=list(compound, Species)]
+   }

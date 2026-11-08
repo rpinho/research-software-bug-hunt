@@ -1,0 +1,28 @@
+diff --git a/windower.py b/windower.py
+index 363dbc1..9562414 100755
+--- a/windower.py
++++ b/windower.py
+@@ -74,9 +74,9 @@ if __name__ == '__main__':
+ 	else:
+ 		outname = args.path
+ 		
++	# set up the random number generator for every input format:
++	prng = numpy.random.RandomState(args.seed)
+ 	if args.input_form == 'msmc':
+-		# set up the random number generator (although it will only be used if sample_gaps != 'no'):
+-		prng = numpy.random.RandomState(args.seed)
+ 		with open(args.path+'.txt', 'r') as infile:
+ 			samplesize = len(next(infile).split()[-1]) # might need this if we're calculating SFS or individuals' singletons
+ 		with open(args.path+'.txt', 'r') as infile:
+@@ -141,9 +141,9 @@ if __name__ == '__main__':
+ 				if not windows:
+ 					break
+ 			else:
+-				try:
++				if fold > 0:
+ 					windows = merge(windows, args.ratio)
+-				except NameError: 
++				elif args.input_form == 'msmc':
+ 					windows = initwindows(SNPs, basecoverage, args)
+ 				if len(windows) < 2:
+ 					print('Reached chromosome length at length scale ' + str(fold), file=outfile)

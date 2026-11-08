@@ -1,0 +1,36 @@
+--- a/lib/GO/TermFinder.pm
++++ b/lib/GO/TermFinder.pm
+@@ -1974,7 +1974,15 @@
+     # real data.  We threshold this at a maximum of 1, as we can't
+     # have a FDR of greater than 100%
+ 
++    my $numDiscoveries = 0;
+     foreach (my $i = 0; $i < @realHypotheses; $i++){
++
++        # A p-value cutoff includes every member of a tie.
++        $numDiscoveries = $i + 1 if $numDiscoveries <= $i;
++        while ($numDiscoveries < @realHypotheses &&
++               $realHypotheses[$numDiscoveries]->{PVALUE} == $realHypotheses[$i]->{PVALUE}){
++            $numDiscoveries++;
++        }
+ 
+ 	if (exists $realHypotheses[$i]->{FDR_OBSERVATIONS}){
+ 
+@@ -1984,7 +1992,7 @@
+ 
+ 	    $realHypotheses[$i]->{FDR_OBSERVATIONS} /= $numSimulations;
+ 
+-	    $realHypotheses[$i]->{FDR_RATE} = $realHypotheses[$i]->{FDR_OBSERVATIONS} / ($i + 1);
++	    $realHypotheses[$i]->{FDR_RATE} = $realHypotheses[$i]->{FDR_OBSERVATIONS} / $numDiscoveries;
+ 
+ 	    if ($realHypotheses[$i]->{FDR_RATE} > 1){
+ 
+@@ -2009,7 +2017,7 @@
+ 	# be chosen at this point, we can calculate the expected number of
+ 	# false positives, as the FDR x the number of hypotheses
+ 
+-	$realHypotheses[$i]->{EXPECTED_FALSE_POSITIVES} = $realHypotheses[$i]->{FDR_RATE} * ($i+1);	
++	$realHypotheses[$i]->{EXPECTED_FALSE_POSITIVES} = $realHypotheses[$i]->{FDR_RATE} * $numDiscoveries;	
+ 
+     }
+ 

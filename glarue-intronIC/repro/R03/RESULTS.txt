@@ -1,0 +1,2 @@
+before: window/reference mismatches = 4; indexed introns passing ambiguity filter = 2
+after: window/reference mismatches = 0; indexed introns passing ambiguity filter = 0

@@ -1,0 +1,103 @@
+diff --git a/Code/alert_model/hpo_fpr.py b/Code/alert_model/hpo_fpr.py
+index 15ac051..af937c6 100644
+--- a/Code/alert_model/hpo_fpr.py
++++ b/Code/alert_model/hpo_fpr.py
+@@ -5,7 +5,7 @@ import numpy as np
+ import optuna
+ import pandas as pd
+ from scipy.stats import loguniform
+-from sklearn.metrics import recall_score
++from sklearn.metrics import recall_score, roc_curve
+ import lightgbm as lgb
+ import os
+ 
+@@ -20,11 +20,10 @@ def tpr_at_fpr(labels, preds):
+     temp = results.sort_values(by="score", ascending=False)
+ 
+     FPR = 0.05
+-    N = (temp["true"] == 0).sum()
+-    FP = round(FPR * N)
+-    aux = temp[temp["true"] == 0]
+-
+-    threshold = aux.iloc[FP - 1, 1]
++    fpr_values, _, thresholds = roc_curve(
++        results["true"], results["score"], drop_intermediate=False
++    )
++    threshold = thresholds[np.flatnonzero(fpr_values <= FPR)[-1]]
+ 
+     y_pred = np.where(results["score"] >= threshold, 1, 0)
+     tpr = recall_score(labels, y_pred)
+@@ -184,11 +183,10 @@ class HPO:
+         temp = results.sort_values(by="score", ascending=False)
+ 
+         FPR = 0.05
+-        N = (temp["true"] == 0).sum()
+-        FP = round(FPR * N)
+-        aux = temp[temp["true"] == 0]
+-
+-        threshold = aux.iloc[FP - 1, 1]
++        fpr_values, _, thresholds = roc_curve(
++            results["true"], results["score"], drop_intermediate=False
++        )
++        threshold = thresholds[np.flatnonzero(fpr_values <= FPR)[-1]]
+ 
+         y_pred = np.where(results["score"] >= threshold, 1, 0)
+         tpr = recall_score(y_val, y_pred)
+diff --git a/Code/alert_model/training_and_predicting.py b/Code/alert_model/training_and_predicting.py
+index 8337d5e..a6e7eb4 100644
+--- a/Code/alert_model/training_and_predicting.py
++++ b/Code/alert_model/training_and_predicting.py
+@@ -7,7 +7,7 @@ import os
+ import pickle
+ from sklearn import metrics
+ import matplotlib.pyplot as plt
+-from sklearn.metrics import confusion_matrix
++from sklearn.metrics import confusion_matrix, roc_curve
+ from pathlib import Path
+ 
+ with open('../data/dataset_cfg.yaml', 'r') as infile:
+@@ -61,11 +61,10 @@ def fpr_thresh(y_true, y_pred):
+ 
+     temp = results.sort_values(by="score", ascending=False)
+     FPR = 0.05
+-    N = (temp["true"] == 0).sum()
+-    FP = round(FPR * N)
+-    aux = temp[temp["true"] == 0]
+-
+-    threshold = aux.iloc[FP - 1, 1]
++    fpr_values, _, thresholds = roc_curve(
++        results["true"], results["score"], drop_intermediate=False
++    )
++    threshold = thresholds[np.flatnonzero(fpr_values <= FPR)[-1]]
+ 
+     y_pred = np.where(results["score"] >= threshold, 1, 0)
+     tpr = metrics.recall_score(y_true, y_pred)
+diff --git a/Code/data/preprocess.py b/Code/data/preprocess.py
+index 9323b12..51c3c24 100644
+--- a/Code/data/preprocess.py
++++ b/Code/data/preprocess.py
+@@ -1,7 +1,7 @@
+ import yaml
+ import pandas as pd
+ import pickle
+-from sklearn.metrics import recall_score
++from sklearn.metrics import recall_score, roc_curve
+ import numpy as np
+ import os
+ 
+@@ -14,11 +14,10 @@ def tpr_at_fpr(labels, preds,fpr):
+     temp = results.sort_values(by="score", ascending=False)
+ 
+     FPR = fpr
+-    N = (temp["true"] == 0).sum()
+-    FP = round(FPR * N)
+-    aux = temp[temp["true"] == 0]
+-
+-    threshold = aux.iloc[FP - 1, 1]
++    fpr_values, _, thresholds = roc_curve(
++        results["true"], results["score"], drop_intermediate=False
++    )
++    threshold = thresholds[np.flatnonzero(fpr_values <= FPR)[-1]]
+ 
+     y_pred = np.where(results["score"] >= threshold, 1, 0)
+     tpr = recall_score(labels, y_pred)

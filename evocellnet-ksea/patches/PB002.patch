@@ -1,0 +1,28 @@
+diff --git a/R/ksea.R b/R/ksea.R
+index 34fc931..8e77ff4 100755
+--- a/R/ksea.R
++++ b/R/ksea.R
+@@ -1,12 +1,12 @@
+ # Required to calculate the p-values in the GSEA.
+ # The p-values are calculated by suffling the signatures
+-computeSimpleEMPES <- function(ranking,exp_value_profile,signature,trials){
++computeSimpleEMPES <- function(ranking,exp_value_profile,signature,trials,p=1){
+   ngenes <- length(ranking)
+   siglen <- length(intersect(signature,ranking))
+   ES <- rep(NA,trials)
+   for (i in 1:trials){
+     shuffled_signature <- ranking[sample(1:ngenes,siglen)]
+-    tmp <- ksea(ranking,exp_value_profile,shuffled_signature,display=FALSE,significance=FALSE)
++    tmp <- ksea(ranking,exp_value_profile,shuffled_signature,p=p,display=FALSE,significance=FALSE)
+     ES[i] <- tmp
+   }
+   return(ES)
+@@ -117,7 +117,7 @@ ksea <- function(ranking, norm_express, signature, p=1, display=TRUE,
+   P <- NA
+ 
+   if(significance){
+-    EMPES <- computeSimpleEMPES(ranking,norm_express,signature,trial) #Calculate ES trial number of times by sampling
++    EMPES <- computeSimpleEMPES(ranking,norm_express,signature,trial,p=p) #Calculate ES trial number of times by sampling
+     P <- (ES >= 0) * (length(which(EMPES >= ES)) / trial) + (ES < 0) * (length(which(EMPES <= ES)) / trial)
+   }
+ 

@@ -1,0 +1,19 @@
+diff --git a/pyfdd/core/datapattern/datapattern.py b/pyfdd/core/datapattern/datapattern.py
+index c5ac428..2a0a036 100755
+--- a/pyfdd/core/datapattern/datapattern.py
++++ b/pyfdd/core/datapattern/datapattern.py
+@@ -386,9 +386,11 @@ class DataPattern:
+                 self._io_load(file_path)
+             else:
+                 raise IOError('File does not exist: {}'.format(file_path))
+-        # Masks
+-        self.pixels_mask = np.array(np.zeros((self.ny, self.nx)), dtype=bool)
+-        self.fitregion_mask = np.array(np.zeros((self.ny, self.nx)), dtype=bool)
++        # Preserve masks restored from a JSON file.
++        if not hasattr(self, 'pixels_mask'):
++            self.pixels_mask = np.array(np.zeros((self.ny, self.nx)), dtype=bool)
++        if not hasattr(self, 'fitregion_mask'):
++            self.fitregion_mask = np.array(np.zeros((self.ny, self.nx)), dtype=bool)
+ 
+         # Create mesh
+         if not self.is_mesh_defined:

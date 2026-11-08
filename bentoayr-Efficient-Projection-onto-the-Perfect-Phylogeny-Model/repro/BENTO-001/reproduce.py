@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+"""Reproduce BENTO-001 on its pinned source, then apply only its patch."""
+import argparse, os, pathlib, shutil, subprocess, sys, tarfile, tempfile, io
+HERE=pathlib.Path(__file__).resolve().parent
+REPO='bentoayr/Efficient-Projection-onto-the-Perfect-Phylogeny-Model'
+PIN='769ccd389a559085df8fa628047eba2f2d850c15'
+p=argparse.ArgumentParser(description=__doc__)
+p.add_argument('--source', type=pathlib.Path, help='existing checkout at the exact pin; otherwise clone from GitHub')
+p.add_argument('--rscript', default='Rscript')
+a=p.parse_args()
+os.environ.update(OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1', MKL_NUM_THREADS='1', VECLIB_MAXIMUM_THREADS='1', NUMEXPR_NUM_THREADS='1', QT_QPA_PLATFORM='offscreen', PYTHONDONTWRITEBYTECODE='1', GIT_LFS_SKIP_SMUDGE='1')
+try: os.nice(max(0, 10-os.nice(0)))
+except (AttributeError, OSError): pass
+def run(cmd, **kw):
+ return subprocess.run(list(map(str,cmd)),check=True,**kw)
+with tempfile.TemporaryDirectory(prefix='BENTO-001-') as tmp:
+ tmp=pathlib.Path(tmp); src=tmp/'source'; case=tmp/'case'
+ shutil.copytree(HERE,case,ignore=shutil.ignore_patterns('__pycache__'))
+ if a.source:
+  original=a.source.resolve()
+  assert subprocess.check_output(['git','-C',str(original),'rev-parse','HEAD'],text=True).strip()==PIN, 'wrong source commit'
+  src.mkdir()
+  data=subprocess.check_output(['git','-C',str(original),'archive',PIN])
+  with tarfile.open(fileobj=io.BytesIO(data)) as archive:
+   for member in archive.getmembers():
+    assert not member.name.startswith('/') and '..' not in pathlib.PurePosixPath(member.name).parts
+   archive.extractall(src)
+  run(['git','init','-q',src])
+ else:
+  run(['git','clone','--depth','1','https://github.com/'+REPO+'.git',src])
+  if subprocess.check_output(['git','-C',str(src),'rev-parse','HEAD'],text=True).strip()!=PIN:
+   run(['git','-C',src,'fetch','--depth','1','origin',PIN]); run(['git','-C',src,'checkout','--detach',PIN])
+ patch=HERE.parents[1]/'patches'/'BENTO-001.patch'
+ run(['git','-C',src,'apply','--check',patch])
+ os.environ['MPLCONFIGDIR']=str(tmp/'matplotlib')
+ try:
+  run(['cc',src/'project_onto_PPM.c','-o',tmp/'before'])
+  run(['git','-C',src,'apply',patch])
+  run(['cc',src/'project_onto_PPM.c','-o',tmp/'after'])
+  for mode in ['before','after']:
+   for flag in ['0','1']:
+    run([tmp/mode,case/'input.txt',case/(mode+'-'+flag+'.txt'),flag],stdout=subprocess.DEVNULL)
+    print(mode+' mode '+flag+': '+(case/(mode+'-'+flag+'.txt')).read_text().strip())
+  run([sys.executable,case/'closed_form.py',case])
+ except BaseException:
+  if subprocess.run(['git','-C',str(src),'apply','--reverse','--check',str(patch)],capture_output=True).returncode==0:
+   run(['git','-C',src,'apply','--reverse',patch])
+  raise
+

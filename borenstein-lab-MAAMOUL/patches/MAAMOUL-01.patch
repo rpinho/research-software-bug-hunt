@@ -1,0 +1,22 @@
+diff --git a/R/utils.R b/R/utils.R
+index 6035edd..9a663fa 100755
+--- a/R/utils.R
++++ b/R/utils.R
+@@ -99,7 +99,7 @@ init_graph <- function(edges, mtb_df, ec_df) {
+       mutate(imputed = F),
+ 
+     # Missing metabolite scores
+-    data.frame(
++    tibble::tibble(
+       feature = all_metabs[! all_metabs %in% mtb_df$feature],
+       anchor = 3,
+       type = 'Metabolite',
+@@ -112,7 +112,7 @@ init_graph <- function(edges, mtb_df, ec_df) {
+       mutate(imputed = F),
+ 
+     # Missing EC scores
+-    data.frame(
++    tibble::tibble(
+       feature = all_ecs[! all_ecs %in% ec_df$feature],
+       anchor = 3,
+       type = 'EC',

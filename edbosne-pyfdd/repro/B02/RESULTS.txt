@@ -1,0 +1,118 @@
+before:
+{
+  "loaded_pixels_mask": [
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ]
+  ],
+  "edited_mask": [
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      true
+    ]
+  ],
+  "edited_sum": 1035.0,
+  "saved_again_sum": 1035.0,
+  "normal": {
+    "sum": 1035.0,
+    "mask": [
+      [
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        true
+      ]
+    ]
+  }
+}
+after:
+{
+  "loaded_pixels_mask": [
+    [
+      true,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ]
+  ],
+  "edited_mask": [
+    [
+      true,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      true
+    ]
+  ],
+  "edited_sum": 35.0,
+  "saved_again_sum": 35.0,
+  "normal": {
+    "sum": 1035.0,
+    "mask": [
+      [
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        true
+      ]
+    ]
+  }
+}

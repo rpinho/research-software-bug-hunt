@@ -1,0 +1,22 @@
+diff --git a/pyfdd/core/patterncreator.py b/pyfdd/core/patterncreator.py
+index f0bd4b6..8b8b4a3 100755
+--- a/pyfdd/core/patterncreator.py
++++ b/pyfdd/core/patterncreator.py
+@@ -385,12 +385,12 @@ class PatternCreator:
+ 
+         # convert to index space
+         # divide by the angular range and multiply by the number of pixels
+-        xscale = self._sim_xmesh.shape[1] / (self._sim_xmesh[0, -1] - self._sim_xmesh[0, 0])
+-        yscale = self._sim_ymesh.shape[0] / (self._sim_ymesh[-1, 0] - self._sim_ymesh[0, 0])
++        xscale = (self._sim_xmesh.shape[1] - 1) / (self._sim_xmesh[0, -1] - self._sim_xmesh[0, 0])
++        yscale = (self._sim_ymesh.shape[0] - 1) / (self._sim_ymesh[-1, 0] - self._sim_ymesh[0, 0])
+ 
+-        # removing half a pixel helps center the final pattern but I don't know why
+-        grid_x_temp = (self._detector_xmesh_temp - self._sim_xmesh[0, 0]) * xscale - 0.5
+-        grid_y_temp = (self._detector_ymesh_temp - self._sim_ymesh[0, 0]) * yscale - 0.5
++        # The first and last angular coordinates are sample centers at indices 0 and n-1.
++        grid_x_temp = (self._detector_xmesh_temp - self._sim_xmesh[0, 0]) * xscale
++        grid_y_temp = (self._detector_ymesh_temp - self._sim_ymesh[0, 0]) * yscale
+ 
+         # interpolation
+         cval = 0 if self._mask_out_of_range else 1e-12

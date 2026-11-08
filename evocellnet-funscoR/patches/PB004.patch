@@ -1,0 +1,12 @@
+diff --git a/R/predict_score.R b/R/predict_score.R
+index 131ac42..460d43a 100755
+--- a/R/predict_score.R
++++ b/R/predict_score.R
+@@ -16,6 +16,7 @@
+ #' @export
+ train_funscore <- function(preprocessed_phos, residue, gold, parameters = NULL, seed = NULL, ncores = 1) {
+     cpu <- list()
++    param <- parameters
+     if (is.null(parameters) & residue == "ST") {
+         ## Constants
+         param <- list()

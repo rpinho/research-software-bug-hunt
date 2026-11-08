@@ -1,0 +1,39 @@
+--- a/lib/GO/OntologyProvider/OboParser.pm
++++ b/lib/GO/OntologyProvider/OboParser.pm
+@@ -273,6 +273,7 @@
+     my @entryLine;
+ 
+     my $isValidEntry = 0;
++    my $isObsolete = 0;
+ 
+     my $namespace;
+ 
+@@ -299,6 +300,7 @@
+ 	    @entryLine = ();
+ 
+ 	    $isValidEntry = 0;
++            $isObsolete = 0;
+ 	    $namespace    = '';
+ 
+ 	}elsif ($_ eq "namespace: $aspect"){
+@@ -307,17 +309,17 @@
+ 
+ 	    $namespace = $aspect;
+ 
+-	    $isValidEntry = 1;
++	    $isValidEntry = !$isObsolete;
+ 	
+ 	}elsif ($_ eq 'is_obsolete: true'){
+ 
+ 	    # we don't want obsolete nodes - DO NOT COMMENT THIS OUT -
+ 	    # infinite recursion will result!
+ 
+-	    # Note, the logic here relies on the is_obsolete line coming after the
+-	    # namespace line.
++	    # Keep the obsolete flag regardless of the order of tags in this stanza.
+ 
+ 	    $isValidEntry = 0;
++            $isObsolete = 1;
+ 		
+ 	}else {
+ 

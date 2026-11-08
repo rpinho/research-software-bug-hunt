@@ -1,0 +1,13 @@
+diff --git a/musicc/core.py b/musicc/core.py
+index ab9c817..322ebaa 100644
+--- a/musicc/core.py
++++ b/musicc/core.py
+@@ -174,7 +174,7 @@ def correct_and_normalize(args):
+ 
+     genes = ko_abun_data.index.values
+     samples = ko_abun_data.columns.values
+-    abun = ko_abun_data.values
++    abun = ko_abun_data.values.astype(np.float64)
+ 
+     # 1.0 version:
+     #abun = []

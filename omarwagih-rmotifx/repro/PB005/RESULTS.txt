@@ -1,0 +1,3 @@
+Exact one-position tail: (1/20)**20 = 9.5367431640625e-27
+Default score before=615.305311137178; correct=after=52.0411998265592
+The entire normal output (representable tail) and requested Perl compatibility output are unchanged.

@@ -1,0 +1,20 @@
+before:
+normalize=TRUE relAbund=TRUE remove_rev=TRUE: A=-400, B=400 (matches direct call: TRUE)
+normalize=TRUE relAbund=TRUE remove_rev=FALSE: A=-400, B=400 (matches direct call: FALSE)
+normalize=TRUE relAbund=FALSE remove_rev=TRUE: A=-400, B=400 (matches direct call: FALSE)
+normalize=TRUE relAbund=FALSE remove_rev=FALSE: A=-400, B=400 (matches direct call: FALSE)
+normalize=FALSE relAbund=TRUE remove_rev=TRUE: A=-400, B=400 (matches direct call: TRUE)
+normalize=FALSE relAbund=TRUE remove_rev=FALSE: A=-400, B=400 (matches direct call: FALSE)
+normalize=FALSE relAbund=FALSE remove_rev=TRUE: A=-400, B=400 (matches direct call: FALSE)
+normalize=FALSE relAbund=FALSE remove_rev=FALSE: A=-400, B=400 (matches direct call: FALSE)
+after:
+normalize=TRUE relAbund=TRUE remove_rev=TRUE: A=-400, B=400 (matches direct call: TRUE)
+normalize=TRUE relAbund=TRUE remove_rev=FALSE: A=-500, B=500 (matches direct call: TRUE)
+normalize=TRUE relAbund=FALSE remove_rev=TRUE: A=-2, B=2 (matches direct call: TRUE)
+normalize=TRUE relAbund=FALSE remove_rev=FALSE: A=-2.5, B=2.5 (matches direct call: TRUE)
+normalize=FALSE relAbund=TRUE remove_rev=TRUE: A=-400, B=400 (matches direct call: TRUE)
+normalize=FALSE relAbund=TRUE remove_rev=FALSE: A=-1000, B=1000 (matches direct call: TRUE)
+normalize=FALSE relAbund=FALSE remove_rev=TRUE: A=-2, B=2 (matches direct call: TRUE)
+normalize=FALSE relAbund=FALSE remove_rev=FALSE: A=-5, B=5 (matches direct call: TRUE)
+Normal/default KO path: unchanged for both normalize settings.
+Independent signed-sum check: all 16 output values agree for the eight option combinations.

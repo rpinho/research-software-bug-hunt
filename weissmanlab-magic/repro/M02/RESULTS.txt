@@ -1,0 +1,4 @@
+before: {"format_error": "TypeError: 'numpy.float64' object is not iterable", "formatted": null, "cli_exit": 1, "cli_error": ["TypeError: 'numpy.float64' object is not iterable"], "cli_final": null, "normal_nozero_output": "0.4 1.0 1.0\n0.6 2.0 3.0"}
+after: {"format_error": null, "formatted": "0.5 1.0 1.0\n0.5", "cli_exit": 0, "cli_error": [], "cli_final": "0.4939277580409113 1.0609009303930115 0.9445331276984255\n0.5060722419590887\n", "normal_nozero_output": "0.4 1.0 1.0\n0.6 2.0 3.0"}
+correct: {"gamma_row": [0.5, 1.0, 1.0], "zero_row": [0.5], "laplace_points": [[1.0, 0.75], [2.0, 0.6666666666666666], [4.0, 0.6]], "zero_mass_format": "one row containing a single column"}
+Numerical reference agrees.

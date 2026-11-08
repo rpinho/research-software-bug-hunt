@@ -1,0 +1,3 @@
+Requested power=2 observed ES=0.8; 1000 fixed draws
+p-value: before=0.154, correct=after=0.277; wrong p=1 null=0.154
+Default p=1 ES and p-value unchanged; both independently recomputed.

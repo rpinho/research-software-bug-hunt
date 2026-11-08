@@ -1,0 +1,3 @@
+Independent exact walk: ['1/2', '1/4', '0', '1/2', '1/4', '0']
+Classic ES: before=0.166666666666667, correct=after=0.5
+Default p=1 normal ES and complete running sum unchanged.

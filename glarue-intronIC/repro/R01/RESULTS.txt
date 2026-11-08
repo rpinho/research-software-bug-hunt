@@ -1,0 +1,2 @@
+before: pandas import exit 1
+after: pandas import exit 0

@@ -1,0 +1,9 @@
+compound,Species,Sample,newValue
+M,A,s1,1
+M,A,s2,2
+M,A,s3,3
+M,B,s1,3
+M,B,s3,1
+M,Residual,s1,0
+M,Residual,s2,0
+M,Residual,s3,0

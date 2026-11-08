@@ -1,0 +1,4 @@
+before: {"windows": [[1, 80], [1, 80], [2, 80]], "retained_sites": 4, "normal_histogram": {"0": 1, "1": 1, "2": 1, "3": 1}, "oracle_mismatches": 1368}
+after: {"windows": [[1, 80], [1, 80], [1, 80], [2, 80]], "retained_sites": 5, "normal_histogram": {"0": 1, "1": 1, "2": 1, "3": 1}, "oracle_mismatches": 0}
+correct: {"windows": [[1, 80], [1, 80], [1, 80], [2, 80]], "histogram": {"1": 3, "2": 1}}
+Numerical reference agrees.

@@ -1,0 +1,55 @@
+diff --git a/pyfdd/core/datapattern/datapattern.py b/pyfdd/core/datapattern/datapattern.py
+index c5ac428..1e69d2c 100755
+--- a/pyfdd/core/datapattern/datapattern.py
++++ b/pyfdd/core/datapattern/datapattern.py
+@@ -980,6 +980,8 @@ class DataPattern:
+ 
+         # Starting values
+         temp_matrix = self.pattern_matrix.copy()
++        pixels_mask = self.pixels_mask.copy()
++        fitregion_mask = self.fitregion_mask.copy()
+         new_nx, new_ny = self.nx, self.ny
+         new_xmesh, new_ymesh = self.get_xymesh()
+ 
+@@ -989,6 +991,8 @@ class DataPattern:
+             if cmd == 'cw':
+                 # rotate clockwise
+                 temp_matrix = np.rot90(temp_matrix, 3)
++                pixels_mask = np.rot90(pixels_mask, 3)
++                fitregion_mask = np.rot90(fitregion_mask, 3)
+                 # Rotate mesh
+                 temp_xmesh = new_xmesh.copy()
+                 new_xmesh = np.rot90(new_ymesh, 1)
+@@ -1000,6 +1004,8 @@ class DataPattern:
+             elif cmd == 'cc':
+                 # rotate counterclockwise
+                 temp_matrix = np.rot90(temp_matrix)
++                pixels_mask = np.rot90(pixels_mask)
++                fitregion_mask = np.rot90(fitregion_mask)
+                 # Rotate mesh
+                 temp_xmesh = new_xmesh.copy()
+                 new_xmesh = np.rot90(new_ymesh, 1)
+@@ -1011,9 +1017,13 @@ class DataPattern:
+             elif cmd == 'mv':
+                 # vertical mirror
+                 temp_matrix = np.flipud(temp_matrix)
++                pixels_mask = np.flipud(pixels_mask)
++                fitregion_mask = np.flipud(fitregion_mask)
+             elif cmd == 'mh':
+                 # horizontal mirror
+                 temp_matrix = np.fliplr(temp_matrix)
++                pixels_mask = np.fliplr(pixels_mask)
++                fitregion_mask = np.fliplr(fitregion_mask)
+             elif cmd == '':
+                 continue
+             else:
+@@ -1025,6 +1035,9 @@ class DataPattern:
+ 
+         # Set the new matrix
+         self.pattern_matrix = temp_matrix
++        self.pixels_mask = pixels_mask
++        self.fitregion_mask = fitregion_mask
++        self._update_mask()
+ 
+     def manip_correct_central_pix(self):
+         """

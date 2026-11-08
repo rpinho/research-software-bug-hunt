@@ -1,0 +1,5 @@
+feature,pval,anchor,type
+E1,0.01,1,EC
+E2,0.2,2,EC
+M1,0.01,1,Metabolite
+M2,0.2,2,Metabolite

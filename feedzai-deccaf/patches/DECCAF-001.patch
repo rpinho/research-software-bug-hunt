@@ -1,0 +1,31 @@
+diff --git a/Code/deferral/run_alert.py b/Code/deferral/run_alert.py
+index ae608b6..b18f73c 100644
+--- a/Code/deferral/run_alert.py
++++ b/Code/deferral/run_alert.py
+@@ -72,7 +72,7 @@ def rand_deferral_func(capacities, batches, testset, expert_preds, env, model, s
+     results = pd.DataFrame(columns = ['prediction'])
+     for i in np.arange(1,batches['batch'].max()+1):
+         c = capacities.loc[capacities['batch_id'] == i,:].iloc[0]
+-        c.loc['model#0'] = c['batch_size'] - c[2:].sum()
++        c.loc['model#0'] = c['batch_size'] - c.drop(labels=['batch_id', 'batch_size', 'model#0'], errors='ignore').sum()
+         cases = testset.loc[batches.loc[batches['batch'] == i]['case_id'],:]
+         experts = expert_preds.columns.to_list()
+         for ix in cases.index:
+@@ -107,7 +107,7 @@ def ova_deferral_func(capacities, batches, testset, expert_preds, model_preds, e
+     results = pd.DataFrame(columns = ['prediction'])
+     for i in np.arange(1,batches['batch'].max()+1):
+         c = capacities.loc[capacities['batch_id'] == i,:].iloc[0]
+-        c.loc['model#0'] = c['batch_size'] - c[2:].sum()
++        c.loc['model#0'] = c['batch_size'] - c.drop(labels=['batch_id', 'batch_size', 'model#0'], errors='ignore').sum()
+         cases = testset.loc[batches.loc[batches['batch'] == i]['case_id'],:]
+         preds = model_preds.loc[cases.index]
+         for ix, row in preds.iterrows():
+@@ -139,7 +139,7 @@ def deccaf_cp_deferral_func(capacities, batches, testset, expert_preds, model_pr
+     results = pd.DataFrame(columns = ['prediction'])
+     for b in np.arange(1,batches['batch'].max()+1):
+         c = capacities.loc[capacities['batch_id'] == b,:].iloc[0]
+-        c.loc['model#0'] = c['batch_size'] - c[2:].sum()
++        c.loc['model#0'] = c['batch_size'] - c.drop(labels=['batch_id', 'batch_size', 'model#0'], errors='ignore').sum()
+         cases = testset.loc[batches.loc[batches['batch'] == b]['case_id'],:] 
+         preds = model_preds.loc[cases.index]
+         cost_matrix_df = preds.T

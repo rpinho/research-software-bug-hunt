@@ -1,0 +1,30 @@
+before:
+{
+  "positive_count_zero_probability": {
+    "nll": 16.96210828960073,
+    "chi2": 0.7160493827160492
+  },
+  "zero_count_zero_probability": {
+    "nll": 16.96210828960073,
+    "chi2": 0.7160493827160492
+  },
+  "normal": {
+    "nll": 19.775021196025975,
+    "chi2": 0.0
+  }
+}
+after:
+{
+  "positive_count_zero_probability": {
+    "nll": "infinity",
+    "chi2": "infinity"
+  },
+  "zero_count_zero_probability": {
+    "nll": 16.96210828960073,
+    "chi2": 0.7160493827160492
+  },
+  "normal": {
+    "nll": 19.775021196025975,
+    "chi2": 0.0
+  }
+}

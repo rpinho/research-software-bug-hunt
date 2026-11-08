@@ -1,0 +1,34 @@
+before:
+{
+  "mode": "before",
+  "actual": {
+    "K00001": 1,
+    "K01866": 0,
+    "K01867": 2
+  },
+  "independent_expected": {
+    "K00001": 1.006676150800693,
+    "K01866": 0.991454178451551,
+    "K01867": 2.013352301601386
+  },
+  "integer_matches_reference": false,
+  "float_matches_reference": true,
+  "normal_input": "saved unpatched output"
+}
+after:
+{
+  "mode": "after",
+  "actual": {
+    "K00001": 1.0066761508006925,
+    "K01866": 0.9914541784515506,
+    "K01867": 2.013352301601385
+  },
+  "independent_expected": {
+    "K00001": 1.006676150800693,
+    "K01866": 0.991454178451551,
+    "K01867": 2.013352301601386
+  },
+  "integer_matches_reference": true,
+  "float_matches_reference": true,
+  "normal_input": "bit-for-bit unchanged"
+}

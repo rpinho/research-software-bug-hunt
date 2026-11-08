@@ -1,0 +1,270 @@
+before:
+{
+  "commands": {
+    "cw": {
+      "mask": [
+        [
+          true,
+          false,
+          false
+        ],
+        [
+          false,
+          true,
+          false
+        ],
+        [
+          false,
+          false,
+          true
+        ]
+      ],
+      "sum": 1029.0
+    },
+    "cc": {
+      "mask": [
+        [
+          true,
+          false,
+          false
+        ],
+        [
+          false,
+          true,
+          false
+        ],
+        [
+          false,
+          false,
+          true
+        ]
+      ],
+      "sum": 1029.0
+    },
+    "mh": {
+      "mask": [
+        [
+          true,
+          false,
+          false
+        ],
+        [
+          false,
+          true,
+          false
+        ],
+        [
+          false,
+          false,
+          true
+        ]
+      ],
+      "sum": 1029.0
+    },
+    "mv": {
+      "mask": [
+        [
+          true,
+          false,
+          false
+        ],
+        [
+          false,
+          true,
+          false
+        ],
+        [
+          false,
+          false,
+          true
+        ]
+      ],
+      "sum": 1029.0
+    },
+    "cw,mh": {
+      "mask": [
+        [
+          true,
+          false,
+          false
+        ],
+        [
+          false,
+          true,
+          false
+        ],
+        [
+          false,
+          false,
+          true
+        ]
+      ],
+      "sum": 30.0
+    }
+  },
+  "rectangular": {
+    "error": "IndexError"
+  },
+  "normal": {
+    "sum": 8.0,
+    "mask": [
+      [
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        true
+      ]
+    ]
+  }
+}
+after:
+{
+  "commands": {
+    "cw": {
+      "mask": [
+        [
+          false,
+          false,
+          true
+        ],
+        [
+          false,
+          true,
+          false
+        ],
+        [
+          false,
+          false,
+          true
+        ]
+      ],
+      "sum": 36.0
+    },
+    "cc": {
+      "mask": [
+        [
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          true,
+          false
+        ],
+        [
+          true,
+          false,
+          true
+        ]
+      ],
+      "sum": 32.0
+    },
+    "mh": {
+      "mask": [
+        [
+          false,
+          false,
+          true
+        ],
+        [
+          false,
+          true,
+          false
+        ],
+        [
+          false,
+          false,
+          true
+        ]
+      ],
+      "sum": 32.0
+    },
+    "mv": {
+      "mask": [
+        [
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          true,
+          false
+        ],
+        [
+          true,
+          false,
+          true
+        ]
+      ],
+      "sum": 36.0
+    },
+    "cw,mh": {
+      "mask": [
+        [
+          true,
+          false,
+          false
+        ],
+        [
+          false,
+          true,
+          false
+        ],
+        [
+          false,
+          false,
+          true
+        ]
+      ],
+      "sum": 30.0
+    }
+  },
+  "rectangular": {
+    "mask": [
+      [
+        false,
+        true
+      ],
+      [
+        false,
+        false
+      ],
+      [
+        false,
+        true
+      ]
+    ],
+    "sum": 17.0
+  },
+  "normal": {
+    "sum": 8.0,
+    "mask": [
+      [
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        true
+      ]
+    ]
+  }
+}

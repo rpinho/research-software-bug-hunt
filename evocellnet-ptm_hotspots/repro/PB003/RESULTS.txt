@@ -1,0 +1,6 @@
+iter2 before p: [nan, nan, nan, nan, 1.0]
+iter2 correct=after p: [0.00020347600872247995, 0.00020347600872247995, 0.01694742676234467, 0.01694742676234459, 1.0]
+default100 before p: [0.005796980731822921, 0.008244901108369252, 0.0074565772108382755, 0.25676502311302907, 1.0]
+default100 correct=after p: [0.005557604382004304, 0.007929386415875735, 0.007170165621883509, 0.2533905759753845, 1.0]
+Independent seeded shuffles, sample SD, Gaussian survival and Bonferroni agree.
+Normal dispersed nonempty PTMs and empty PTMs, default 100 permutations: all output unchanged.

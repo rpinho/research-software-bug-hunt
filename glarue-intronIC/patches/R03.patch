@@ -1,0 +1,47 @@
+diff --git a/src/intronIC/cli/main.py b/src/intronIC/cli/main.py
+index b005fda..1539404 100644
+--- a/src/intronIC/cli/main.py
++++ b/src/intronIC/cli/main.py
+@@ -2921,11 +2921,9 @@ def scored_window_slices(seq, upstream, downstream, scoring_regions):
+     scoring_seq = up + s + down
+     ul, dl = len(up), len(down)
+     fs, fe = scoring_regions.five_start + ul, scoring_regions.five_end + ul
+-    ts, te = scoring_regions.three_start - dl, scoring_regions.three_end - dl
+-    fs = fs if fs != 0 else None
+-    fe = fe if fe != 0 else None
+-    ts = ts if ts != 0 else None
+-    te = te if te != 0 else None
++    ts = ul + len(s) + scoring_regions.three_start
++    te = ul + len(s) + scoring_regions.three_end
++    fs, fe, ts, te = (max(0, i) for i in (fs, fe, ts, te))
+     return scoring_seq[fs:fe], scoring_seq[ts:te]
+ 
+ 
+diff --git a/src/intronIC/extraction/sequences.py b/src/intronIC/extraction/sequences.py
+index c5cd403..36a7171 100644
+--- a/src/intronIC/extraction/sequences.py
++++ b/src/intronIC/extraction/sequences.py
+@@ -350,14 +350,15 @@ class SequenceExtractor:
+         # Adjust coordinates for scoring regions (relative to scoring_seq)
+         five_start = five_score_coords[0] + upstream_len
+         five_end = five_score_coords[1] + upstream_len
+-        three_start = three_score_coords[0] - downstream_len
+-        three_end = three_score_coords[1] - downstream_len
+-
+-        # Handle zero indices (Python slicing None = end/start)
+-        five_start = five_start if five_start != 0 else None
+-        five_end = five_end if five_end != 0 else None
+-        three_start = three_start if three_start != 0 else None
+-        three_end = three_end if three_end != 0 else None
++        three_start = upstream_len + len(intron_seq) + three_score_coords[0]
++        three_end = upstream_len + len(intron_seq) + three_score_coords[1]
++
++        # Absolute half-open indices also work when a contig ends before
++        # the requested flank; negative relative stop indices do not.
++        five_start = max(0, five_start)
++        five_end = max(0, five_end)
++        three_start = max(0, three_start)
++        three_end = max(0, three_end)
+ 
+         five_seq = scoring_seq[five_start:five_end]
+         three_seq = scoring_seq[three_start:three_end]

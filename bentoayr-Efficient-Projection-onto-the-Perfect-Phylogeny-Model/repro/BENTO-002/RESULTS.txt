@@ -1,0 +1,9 @@
+case: exact rational closed form agrees
+before mode 0: 0.000100
+0.750000 0.250000
+before mode 1: 0.000049
+0.000000 -49.374222
+after mode 0: 0.000000
+0.750000 0.250000
+after mode 1: 0.000000
+0.749999 0.250000
